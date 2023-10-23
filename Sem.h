@@ -13,23 +13,23 @@ public:
 
     Sem(int sem_value){
        if(sem_init(&sem, 0, sem_value) != 0){
-          throw std::runtime_error("Failed to initialize sem")
+          throw std::runtime_error("Failed to initialize mutex_sem")
        }
     }
 
     ~Sem(){
        if(sem_destroy(&sem) != 0){
-          throw std::runtime_error("Failed to destroy sem");
+          throw std::runtime_error("Failed to destroy mutex_sem");
        }
     }
 
-    void lock(){
+    void wait(){
        if(sem_wait(&sem) != 0){
-          throw std::runtime_error("Failed to lock");
+          throw std::runtime_error("Failed to wait");
        }
     }
 
-    void unlock(){
+    void post(){
        if(sem_post(&sem) != 0){
           throw std::runtime_error("Failed to Post");
        }

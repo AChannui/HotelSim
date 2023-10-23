@@ -10,11 +10,11 @@
 class Lock {
 public:
     Lock(Sem& sem_):sem(sem_){
-       sem.lock();
+       sem.wait();
     }
 
     ~Lock(){
-       sem.unlock();
+       sem.post();
     }
 
 private:
