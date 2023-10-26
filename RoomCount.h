@@ -18,7 +18,7 @@ public:
 
 private:
     int count = 1;
-    Sem mutex_sem = Sem(0);
+    Sem mutex_sem = Sem(1);
 
 };
 

@@ -4,6 +4,8 @@
 
 #ifndef CS4348OS_PROJECT2_SEM_H
 #define CS4348OS_PROJECT2_SEM_H
+
+#include <cstring>
 #include "semaphore.h"
 #include "stdexcept"
 
@@ -12,15 +14,16 @@ class Sem {
 public:
 
     Sem(int sem_value){
-       if(sem_init(&sem, 0, sem_value) != 0){
-          throw std::runtime_error("Failed to initialize mutex_sem")
+       int rc=sem_init(&sem, 0, sem_value);
+       if(rc != 0){
+          std::cout << "rc=" << rc << std::endl;
+          std::cout << "errno=" << errno << " " << strerror(errno) << std::endl;
+          throw std::runtime_error("Failed to initialize mutex_sem");
        }
     }
 
     ~Sem(){
-       if(sem_destroy(&sem) != 0){
-          throw std::runtime_error("Failed to destroy mutex_sem");
-       }
+       sem_destroy(&sem);
     }
 
     void wait(){

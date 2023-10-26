@@ -10,10 +10,12 @@
 class Lock {
 public:
     Lock(Sem& sem_):sem(sem_){
+       // starts the lock when constructed
        sem.wait();
     }
 
     ~Lock(){
+       // when run out of scope will release lock
        sem.post();
     }
 

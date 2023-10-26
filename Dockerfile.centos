@@ -1,0 +1,13 @@
+From centos:7.9.2009
+
+RUN true \
+    && rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 \
+    && rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7-aarch64 \
+    && yum groupinstall -y "Development Tools" \
+    && yum install -y vim gdb zsh \
+    && true
+
+RUN true \
+    && yum install -y cmake \
+    && true
+

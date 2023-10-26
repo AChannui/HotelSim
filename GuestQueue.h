@@ -4,11 +4,11 @@
 
 #ifndef CS4348OS_PROJECT2_GUESTQUEUE_H
 #define CS4348OS_PROJECT2_GUESTQUEUE_H
+#include <queue>
+
 #include "Lock.h"
-#include "queue"
-#include "Guest.h"
 
-
+class Guest;
 
 class GuestQueue {
 public:
