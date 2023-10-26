@@ -9,6 +9,8 @@
 
 class RoomCount {
 public:
+    RoomCount(): count(1), mutex_sem(Sem(1)){}
+
     int get_count(){
        Lock lock(mutex_sem);
        int temp = count;
@@ -17,8 +19,8 @@ public:
     }
 
 private:
-    int count = 1;
-    Sem mutex_sem = Sem(1);
+    int count;
+    Sem mutex_sem;
 
 };
 

@@ -21,33 +21,39 @@ static void *runnable_invoke(void *handle) {
    return nullptr;
 }
 
+// creates thread
 void Bellhop::start() {
    pthread_create(&ptid, NULL, runnable_invoke, this);
 }
 
+// main loop
 void Bellhop::loop() {
+   // creation print message
    {
       std::ostringstream stream;
       stream << "Bellhop created " << employee_id << " created";
       logger.print(stream.str());
    }
-   while(true){
-      Guest* current_guest = bellhop_queue.pop();
+   // main loop
+   while (true) {
+      Guest *current_guest = bellhop_queue.pop(); // waits and grabs next guest in queue
       {
          std::ostringstream stream;
-         stream << "Bellhop " << employee_id << " receives bags from guest " << current_guest->get_guest_id();
+         stream << "Bellhop " << employee_id << " receives bags from guest "
+                << current_guest->get_guest_id();
          logger.print(stream.str());
       }
-      current_guest->bellhop_help(this);
-      current_guest->signal_bag();
-      guest_sem.wait();
+      current_guest->bellhop_help(this); // gives pointer to self to the guest its helping
+      current_guest->signal_bag(); // signalling guest the bellhop took their bags
+      guest_sem.wait(); // waits for guest to get to room
       {
          std::ostringstream stream;
-         stream << "Bellhop " << employee_id << " delivers bags to guest " << current_guest->get_guest_id();
+         stream << "Bellhop " << employee_id << " delivers bags to guest "
+                << current_guest->get_guest_id();
          logger.print(stream.str());
       }
-      current_guest->signal_bag();
-      guest_sem.wait();
+      current_guest->signal_bag(); // signals guest they gave bags back
+      guest_sem.wait(); // waits for tip
    }
 }
 

@@ -44,22 +44,22 @@ public:
        front_desk_helper = input;
     }
 
-    pthread_t get_ptid(){
+    pthread_t get_ptid() {
        Lock lock(mutex_sem);
        return ptid;
     }
 
-    int get_guest_id(){
+    int get_guest_id() {
        Lock lock(mutex_sem);
        return guest_id;
     }
 
-    int get_room_numb(){
+    int get_room_numb() {
        Lock lock(mutex_sem);
        return room_numb;
     }
 
-    void bellhop_help(Bellhop *bellhop_){
+    void bellhop_help(Bellhop *bellhop_) {
        Lock lock(mutex_sem);
        bellhop = bellhop_;
     }
@@ -74,6 +74,7 @@ private:
     int bag_numb;
     int guest_id;
     int front_desk_helper;
+    int bag_limit;
     Sem mutex_sem = Sem(1);
     Sem bag_sem = Sem(0);
     Sem room_key_sem = Sem(0);
@@ -82,7 +83,7 @@ private:
     GuestQueue &bellhop_queue;
     GuestQueue &exit_queue;
     Logger &logger;
-    Bellhop* bellhop;
+    Bellhop *bellhop;
 
 };
 

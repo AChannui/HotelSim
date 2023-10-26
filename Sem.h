@@ -13,27 +13,28 @@
 class Sem {
 public:
 
-    Sem(int sem_value){
-       int rc=sem_init(&sem, 0, sem_value);
-       if(rc != 0){
+    Sem(int sem_value) {
+       int rc = sem_init(&sem, 0, sem_value); // creation of semaphore
+       if (rc != 0) {
+          // bug testing tools
           std::cout << "rc=" << rc << std::endl;
           std::cout << "errno=" << errno << " " << strerror(errno) << std::endl;
           throw std::runtime_error("Failed to initialize mutex_sem");
        }
     }
 
-    ~Sem(){
+    ~Sem() {
        sem_destroy(&sem);
     }
 
-    void wait(){
-       if(sem_wait(&sem) != 0){
+    void wait() {
+       if (sem_wait(&sem) != 0) {
           throw std::runtime_error("Failed to wait");
        }
     }
 
-    void post(){
-       if(sem_post(&sem) != 0){
+    void post() {
+       if (sem_post(&sem) != 0) {
           throw std::runtime_error("Failed to Post");
        }
     }

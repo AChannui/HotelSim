@@ -4,6 +4,7 @@
 
 #ifndef CS4348OS_PROJECT2_BELLHOP_H
 #define CS4348OS_PROJECT2_BELLHOP_H
+
 #include <iostream>
 #include <sstream>
 
@@ -15,12 +16,14 @@ class Bellhop {
 public:
     Bellhop(int employee_id_, GuestQueue &bellhop_queue_, Logger &logger_);
 
-    void guest_signal(){
+    // used for guest to signal in room
+    void guest_signal() {
        Lock lock(mutex_sem);
        guest_sem.post();
     }
 
-    int get_employee_id(){
+    // used for printing
+    int get_employee_id() {
        Lock lock(mutex_sem);
        return employee_id;
     }
@@ -39,9 +42,6 @@ private:
 
 
 };
-
-
-
 
 
 #endif //CS4348OS_PROJECT2_BELLHOP_H

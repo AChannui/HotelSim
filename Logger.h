@@ -13,14 +13,15 @@
 
 class Logger {
 public:
-    Logger(){}
+    Logger() {}
 
-    void print(std::string input){
+    // takes string and prints it out with new line at the end
+    void print(std::string input) {
        Lock lock(mutex_sem);
        std::cout << input << std::endl;
     }
 
-    void print(std::ostringstream& input){
+    void print(std::ostringstream &input) {
        Lock lock(mutex_sem);
        std::cout << input.str() << std::endl;
     }

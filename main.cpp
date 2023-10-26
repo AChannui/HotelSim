@@ -7,7 +7,6 @@
 
 
 int main() {
-   std::cout << "Hello, World!" << std::endl;
    srand(time(NULL));
    int guest_list_size = 25;
    int front_desk_size = 2;
@@ -33,13 +32,13 @@ int main() {
 
    // creation of bellhops
    std::vector<Bellhop> bellhop_list;
-   for(int i = 0; i < bellhop_list_size; i++){
+   for (int i = 0; i < bellhop_list_size; i++) {
       pthread_t ptid;
       bellhop_list.push_back(Bellhop(i, bellhop_queue, logger));
    }
 
    // start of bellhops
-   for(auto &bellhop : bellhop_list){
+   for (auto &bellhop: bellhop_list) {
       bellhop.start();
    }
 
@@ -57,15 +56,13 @@ int main() {
       guest.start();
    }
 
-
-
-
+   // join loop
    while (exit_count < guest_list_size) {
-      Guest *current_guest = exit_queue.pop();
+      Guest *current_guest = exit_queue.pop(); // gets guest off exit queue
       pthread_join(current_guest->get_ptid(), nullptr);
       {
          std::ostringstream stream;
-         stream <<  "Guest " << current_guest->get_guest_id() << " joined";
+         stream << "Guest " << current_guest->get_guest_id() << " joined";
          logger.print(stream.str());
       }
       exit_count++;
