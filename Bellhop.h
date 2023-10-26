@@ -35,7 +35,7 @@ private:
     Sem mutex_sem;
     Sem guest_sem;
     pthread_t ptid;
-    Logger logger;
+    Logger &logger;
 
 
 };

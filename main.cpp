@@ -63,7 +63,11 @@ int main() {
    while (exit_count < guest_list_size) {
       Guest *current_guest = exit_queue.pop();
       pthread_join(current_guest->get_ptid(), nullptr);
-      std::cout << "Guest " << current_guest->get_guest_id() << " joined" << std::endl;
+      {
+         std::ostringstream stream;
+         stream <<  "Guest " << current_guest->get_guest_id() << " joined";
+         logger.print(stream.str());
+      }
       exit_count++;
    }
 

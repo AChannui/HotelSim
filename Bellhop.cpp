@@ -38,8 +38,8 @@ void Bellhop::loop() {
          stream << "Bellhop " << employee_id << " receives bags from guest " << current_guest->get_guest_id();
          logger.print(stream.str());
       }
-      current_guest->signal_bag();
       current_guest->bellhop_help(this);
+      current_guest->signal_bag();
       guest_sem.wait();
       {
          std::ostringstream stream;
