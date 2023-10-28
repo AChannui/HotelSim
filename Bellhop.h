@@ -36,7 +36,6 @@ private:
     GuestQueue &bellhop_queue;
     Sem mutex_sem;
     Sem guest_sem;
-    pthread_t ptid;
     Logger &logger;
 
 

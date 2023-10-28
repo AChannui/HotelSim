@@ -45,10 +45,6 @@ public:
        front_desk_helper = input;
     }
 
-    pthread_t get_ptid() {
-       Lock lock(mutex_sem);
-       return ptid;
-    }
 
     int get_guest_id() {
        Lock lock(mutex_sem);
@@ -78,7 +74,6 @@ private:
     Sem mutex_sem = Sem(1);
     Sem bag_sem = Sem(0);
     Sem room_key_sem = Sem(0);
-    pthread_t ptid;
     GuestQueue &check_in_queue;
     GuestQueue &bellhop_queue;
     GuestQueue &exit_queue;

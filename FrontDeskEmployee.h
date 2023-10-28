@@ -32,7 +32,6 @@ private:
     RoomCount &room_count;
     GuestQueue &check_in_queue;
     Sem mutex_sem = Sem(1);
-    pthread_t ptid;
     Logger &logger;
 
 };

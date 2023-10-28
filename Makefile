@@ -15,4 +15,12 @@ shell-centos:
 
 export:
 	git archive --prefix=CS4348OS_project2/ -o ../CS4348OS_project2.tar HEAD
-	gzip ../CS4348OS_project2.tar
+	gzip -f ../CS4348OS_project2.tar
+
+tar:
+	tar -zcv --exclude .git --exclude 'cmake*' --exclude .idea -f ../CS4348OS_project2.tar.gz -C .. CS4348OS_project2
+
+cs1:
+	scp ../CS4348OS_project2.tar.gz cs1:
+	ssh cs1 "rm -rf CS4348OS_project2 build"
+	ssh cs1 "tar -xvf CS4348OS_project2.tar.gz &&  mkdir build && cd build && cmake  -DCMAKE_BUILD_TYPE=Debug ../CS4348OS_project2 && make && ./CS4348OS_project2"

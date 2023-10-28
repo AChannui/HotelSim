@@ -11,6 +11,10 @@ class Runnable {
 public:
     void start();
 
+    void join(){
+       pthread_join(ptid, nullptr);
+    }
+
     virtual void loop() = 0;
 
     virtual ~Runnable(){}
