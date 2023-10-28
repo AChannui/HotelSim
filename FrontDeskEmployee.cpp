@@ -18,16 +18,6 @@ FrontDeskEmployee::FrontDeskEmployee(
 
 }
 
-static void *runnable_invoke(void *handle) {
-   auto obj = reinterpret_cast<FrontDeskEmployee *>(handle);
-   obj->loop();
-   pthread_exit(nullptr);
-   return nullptr;
-}
-
-void FrontDeskEmployee::start() {
-   pthread_create(&ptid, NULL, runnable_invoke, this);
-}
 
 // main thread loop
 void FrontDeskEmployee::loop() {

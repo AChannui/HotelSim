@@ -10,11 +10,12 @@
 
 #include "GuestQueue.h"
 #include "Logger.h"
+#include "Runnable.h"
 
 class Bellhop;
 
 
-class Guest {
+class Guest : public Runnable{
 public:
     Guest(int guest_numb_, int bag_numb_, GuestQueue &check_in_queue_, GuestQueue &bellhop_queue_,
           GuestQueue &exit_queue_, Logger &logger_);
@@ -64,7 +65,6 @@ public:
        bellhop = bellhop_;
     }
 
-    void start();
 
     void loop();
 

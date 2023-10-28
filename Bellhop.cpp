@@ -14,17 +14,6 @@ Bellhop::Bellhop(int employee_id_, GuestQueue &bellhop_queue_, Logger &logger_) 
         guest_sem(Sem(0)) {
 }
 
-static void *runnable_invoke(void *handle) {
-   auto obj = reinterpret_cast<Bellhop *>(handle);
-   obj->loop();
-   pthread_exit(nullptr);
-   return nullptr;
-}
-
-// creates thread
-void Bellhop::start() {
-   pthread_create(&ptid, NULL, runnable_invoke, this);
-}
 
 // main loop
 void Bellhop::loop() {

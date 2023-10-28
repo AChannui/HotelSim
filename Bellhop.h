@@ -10,9 +10,10 @@
 
 #include "GuestQueue.h"
 #include "Logger.h"
+#include "Runnable.h"
 
 
-class Bellhop {
+class Bellhop : public Runnable{
 public:
     Bellhop(int employee_id_, GuestQueue &bellhop_queue_, Logger &logger_);
 
@@ -27,8 +28,6 @@ public:
        Lock lock(mutex_sem);
        return employee_id;
     }
-
-    void start();
 
     void loop();
 

@@ -17,18 +17,6 @@ Guest::Guest(int guest_numb_, int bag_numb_, GuestQueue &check_in_queue_,
         logger(logger_),
         bag_limit(2) {}
 
-static void *runnable_invoke(void *handle) {
-   auto obj = reinterpret_cast<Guest *>(handle);
-   obj->loop();
-   pthread_exit(nullptr);
-   return nullptr;
-}
-
-// creates thread
-void Guest::start() {
-   pthread_create(&ptid, NULL, runnable_invoke, this);
-}
-
 // main thread actions
 void Guest::loop() {
    // creation print

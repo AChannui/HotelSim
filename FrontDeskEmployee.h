@@ -11,9 +11,10 @@
 #include "GuestQueue.h"
 #include "Guest.h"
 #include "Logger.h"
+#include "Runnable.h"
 
 
-class FrontDeskEmployee {
+class FrontDeskEmployee : public Runnable{
 public:
     FrontDeskEmployee(int employee_id_, GuestQueue &check_in_queue_, RoomCount &room_count_,
                       Logger &logger_);
@@ -23,7 +24,6 @@ public:
        return employee_id;
     }
 
-    void start();
 
     void loop();
 
