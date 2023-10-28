@@ -27,10 +27,7 @@ public:
        Guest *temp = guest_queue.front(); // gets guest from front of queue
        guest_queue.pop(); // deletes person from front
        return temp;
-
-
     }
-
 
 private:
     std::queue<Guest *> guest_queue;

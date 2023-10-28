@@ -29,29 +29,17 @@ void Bellhop::start() {
 // main loop
 void Bellhop::loop() {
    // creation print message
-   {
-      std::ostringstream stream;
-      stream << "Bellhop created " << employee_id << " created";
-      logger.print(stream.str());
-   }
+   (logger.stream() << "Bellhop created " << employee_id << " created").flush();
    // main loop
    while (true) {
       Guest *current_guest = bellhop_queue.pop(); // waits and grabs next guest in queue
-      {
-         std::ostringstream stream;
-         stream << "Bellhop " << employee_id << " receives bags from guest "
-                << current_guest->get_guest_id();
-         logger.print(stream.str());
-      }
+      (logger.stream() << "Bellhop " << employee_id << " receives bags from guest "
+                << current_guest->get_guest_id()).flush();
       current_guest->bellhop_help(this); // gives pointer to self to the guest its helping
       current_guest->signal_bag(); // signalling guest the bellhop took their bags
       guest_sem.wait(); // waits for guest to get to room
-      {
-         std::ostringstream stream;
-         stream << "Bellhop " << employee_id << " delivers bags to guest "
-                << current_guest->get_guest_id();
-         logger.print(stream.str());
-      }
+      (logger.stream() << "Bellhop " << employee_id << " delivers bags to guest "
+                << current_guest->get_guest_id()).flush();
       current_guest->signal_bag(); // signals guest they gave bags back
       guest_sem.wait(); // waits for tip
    }

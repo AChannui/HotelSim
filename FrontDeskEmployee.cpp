@@ -31,24 +31,15 @@ void FrontDeskEmployee::start() {
 
 // main thread loop
 void FrontDeskEmployee::loop() {
-   {
-      std::ostringstream stream;
-      stream << "Front desk employee " << employee_id << " created";
-      logger.print(stream.str());
-   }
+   (logger.stream() << "Front desk employee " << employee_id << " created").flush();
    while (true) {
       Guest *current_guest = check_in_queue.pop(); // grabs guest from queue
       current_guest->set_room_key(room_count.get_count()); // sets room numb
       current_guest->set_front_desk_helper(employee_id); // saves employee id to guest
-      {
-         std::ostringstream stream;
-         stream <<
+      (logger.stream() <<
                 "Front desk employee " << employee_id << " registers guest "
                 << current_guest->get_guest_id() << " and assigns room "
-                << current_guest->get_room_numb();
-
-         logger.print(stream.str());
-      }
+                << current_guest->get_room_numb()).flush();
       current_guest->signal_room_key(); // signals guest its finished
    }
 }
